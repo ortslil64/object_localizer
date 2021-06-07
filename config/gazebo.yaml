@@ -1,0 +1,10 @@
+object_detector:
+    image_topic: '/kinect/color/image_raw/compressed'
+    image_topic_debug: '/object_detector/image_raw/compressed'
+    objects_topic: '/object_detector/objects'
+    point_cloud_topic: '/kinect/depth/points'
+    objects_markers_topic: '/object_detector/objects/markers'
+    frame_id:  'camera_optical_frame'
+    loop_duration: 1
+    publish_markers: true
+    publish_marked_image: true

@@ -1,0 +1,9 @@
+object_detector:
+    image_topic: '/camera/color/image_raw/compressed'
+    image_topic_debug: '/object_detector/image_raw/compressed'
+    objects_topic: '/object_detector/objects'
+    point_cloud_topic: '/camera/depth/points'
+    objects_markers_topic: '/object_detector/objects/markers'
+    loop_duration: 1
+    publish_markers: true
+    publish_marked_image: true

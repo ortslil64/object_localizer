@@ -1,0 +1,40 @@
+<launch>
+  <rosparam file="$(find object_localizer)/config/gazebo.yaml" />
+  <node pkg="object_localizer" type="object_localizer_node.py" name="object_localizer_node" output="screen"/>
+  <node name="line_extractor" pkg="laser_line_extraction" type="line_extraction_node">
+    <param name="~frequency" value="30.0" />
+    <param name="~frame_id" value="base_laser" />
+    <param name="~scan_topic" value="scan" />
+    <param name="~publish_markers" value="true" />
+    <param name="~bearing_std_dev" value="1e-5" />
+    <param name="~range_std_dev" value="0.012" />
+    <param name="~least_sq_angle_thresh" value="0.0001" />
+    <param name="~least_sq_radius_thresh" value="0.0001" />
+    <param name="~max_range" value="10.0" />
+    <param name="~max_line_gap" value="1.0" />
+    <param name="~min_line_length" value="0.51" />
+    <param name="~min_range" value="0.5" />
+    <param name="~min_split_dist" value="0.1" />
+    <param name="~outlier_dist" value="0.9" />
+    <param name="~min_line_points" value="5" />
+  </node>
+  <node name="exits_detector" pkg="exits_detector" type="exits_detector_node.py" output="screen"/>
+  <node name="sparse_slam_tf" pkg="sparse_slam" type="tf_broadcaster.py" output="screen"/>
+  <node pkg="rviz" type="rviz" name="rviz" args="-d $(find object_localizer)/rviz/rviz.rviz"/>
+  <!--
+  <node pkg="laser_scan_matcher" type="laser_scan_matcher_node" 
+    name="laser_scan_matcher_node" output="screen">
+    <param name="publish_tf" value="false"/>
+    <param name="use_vel" value="false"/>
+    <param name="use_imu" value="false"/>
+    <param name="use_odom" value="true"/>
+    <param name="max_iterations" value="10"/>
+    <param name="use_corr_tricks" value="1"/>
+    <param name="restart" value="1"/>
+    <param name="fixed_frame" type="string" value="world" />    
+    <param name="base_frame" type="string" value="base_link" />
+    
+  </node>
+-->
+  
+</launch>
